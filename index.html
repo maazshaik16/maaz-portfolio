@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shaik Maaz - Portfolio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        blob: "blob 7s infinite",
+                        "gradient-x": "gradient-x 3s ease infinite",
+                        fadeIn: "fadeIn 0.2s ease-out forwards",
+                        scaleIn: "scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+                    },
+                    keyframes: {
+                        blob: {
+                            "0%": { transform: "translate(0px, 0px) scale(1)" },
+                            "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+                            "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+                            "100%": { transform: "translate(0px, 0px) scale(1)" },
+                        },
+                        "gradient-x": {
+                            "0%, 100%": { "background-position": "0% 50%" },
+                            "50%": { "background-position": "100% 50%" },
+                        },
+                        fadeIn: {
+                            "from": { opacity: "0" },
+                            "to": { opacity: "1" },
+                        },
+                        scaleIn: {
+                            "from": { transform: "scale(0.95)", opacity: "0" },
+                            "to": { transform: "scale(1)", opacity: "1" },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Utilities */
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-4000 { animation-delay: 4s; }
+        
+        /* Scroll Reveal State */
+        .reveal-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease-out;
+        }
+        .reveal-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Selection Color */
+        ::selection {
+            background-color: rgba(6, 182, 212, 0.3);
+            color: #bae6fd;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #020617;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 min-h-screen text-gray-200 font-sans overflow-x-hidden">
+
+    <!-- Custom Cursor Glow -->
+    <div id="cursor-glow" class="pointer-events-none fixed inset-0 z-0 transition-opacity duration-300" 
+         style="background: radial-gradient(600px circle at 0px 0px, rgba(56, 189, 248, 0.06), transparent 40%);">
+    </div>
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 bg-transparent py-6">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-500">
+                SM.
+            </a>
+
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors uppercase tracking-widest">About</a>
+                <a href="#skills" class="text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors uppercase tracking-widest">Skills</a>
+                <a href="#projects" class="text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors uppercase tracking-widest">Projects</a>
+                <a href="#contact" class="text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors uppercase tracking-widest">Contact</a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button id="mobile-menu-btn" class="md:hidden text-white">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Nav -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-slate-900 border-b border-white/10 p-6 flex-col space-y-4 shadow-xl">
+            <a href="#about" class="mobile-link text-gray-300 hover:text-cyan-400 block">About</a>
+            <a href="#skills" class="mobile-link text-gray-300 hover:text-cyan-400 block">Skills</a>
+            <a href="#projects" class="mobile-link text-gray-300 hover:text-cyan-400 block">Projects</a>
+            <a href="#contact" class="mobile-link text-gray-300 hover:text-cyan-400 block">Contact</a>
+        </div>
+    </nav>
+
+    <main class="relative z-10">
+        <!-- Hero Section -->
+        <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+            <!-- Background Blobs -->
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/20 rounded-full mix-blend-screen filter blur-3xl animate-blob"></div>
+            <div class="absolute top-1/3 right-1/4 w-96 h-96 bg-cyan-600/20 rounded-full mix-blend-screen filter blur-3xl animate-blob animation-delay-2000"></div>
+            <div class="absolute -bottom-32 left-1/2 w-96 h-96 bg-blue-600/20 rounded-full mix-blend-screen filter blur-3xl animate-blob animation-delay-4000"></div>
+
+            <div class="container mx-auto px-6 relative z-10 text-center">
+                <div class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-cyan-400 uppercase bg-cyan-900/10 border border-cyan-500/20 rounded-full">
+                    Available for Hire
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
+                    Hi, I'm <span class="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-gradient-x">Shaik Maaz</span>
+                </h1>
+
+                <div class="h-8 md:h-12 mb-8 text-lg md:text-2xl text-gray-400 font-light flex justify-center items-center">
+                    <span class="mr-2">&gt;</span>
+                    <span id="role-text" class="text-gray-200">CSBS Student</span>
+                    <span class="animate-pulse text-cyan-400 ml-1">_</span>
+                </div>
+
+                <p class="max-w-xl mx-auto text-gray-400 mb-10 leading-relaxed">
+                    Building the bridge between business logic and artificial intelligence.
+                </p>
+
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#projects" class="px-8 py-3 rounded-lg bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition-all shadow-[0_0_20px_rgba(6,182,212,0.5)] hover:shadow-[0_0_30px_rgba(6,182,212,0.7)]">
+                        View Projects
+                    </a>
+                    <a href="#contact" class="px-8 py-3 rounded-lg border border-white/20 text-white font-semibold hover:bg-white/10 transition-all backdrop-blur-sm">
+                        Contact Me
+                    </a>
+                </div>
+            </div>
+
+            <!-- Scroll Down Indicator -->
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+                <div class="w-5 h-8 border-2 border-gray-500 rounded-full flex justify-center pt-1">
+                    <div class="w-1 h-1 bg-cyan-400 rounded-full animate-ping"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About & Skills Section -->
+        <div class="bg-black/30">
+            <section id="about" class="reveal-section py-20 md:py-32 relative">
+                <div class="container mx-auto px-6">
+                    <div class="mb-16">
+                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-2 flex items-center gap-3">
+                            <span class="w-8 h-1 bg-cyan-500 rounded-full"></span>
+                            About Me
+                        </h2>
+                        <div class="w-full h-[1px] bg-gradient-to-r from-white/10 to-transparent mt-4"></div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <!-- Timeline / Bio -->
+                        <div class="space-y-6">
+                            <div class="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm hover:border-cyan-500/30 transition-all group">
+                                <h3 class="text-xl font-bold text-white mb-1 group-hover:text-cyan-400 transition-colors">
+                                    B.Tech in Computer Science & Business Systems
+                                </h3>
+                                <p class="text-sm text-gray-400 mb-2">
+                                    Vishnu Institute of Technology | 2023 – 2027
+                                </p>
+                                <p class="text-gray-300 leading-relaxed">
+                                    I am a passionate developer focused on creating scalable software solutions and exploring the frontiers of Generative AI. My goal is to leverage technology to solve real-world business problems.
+                                </p>
+                            </div>
+
+                            <div class="flex gap-4">
+                                <div class="flex-1 p-4 rounded-xl bg-gradient-to-br from-purple-900/20 to-blue-900/20 border border-white/10 flex items-center justify-center flex-col text-center">
+                                    <span class="text-3xl font-bold text-white mb-1">5+</span>
+                                    <span class="text-xs text-gray-400 uppercase tracking-wider">Projects</span>
+                                </div>
+                                <div class="flex-1 p-4 rounded-xl bg-gradient-to-br from-cyan-900/20 to-teal-900/20 border border-white/10 flex items-center justify-center flex-col text-center">
+                                    <span class="text-3xl font-bold text-white mb-1">4</span>
+                                    <span class="text-xs text-gray-400 uppercase tracking-wider">Certifications</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Skills Grid -->
+                        <div id="skills" class="grid grid-cols-1 sm:grid-cols-2 gap-4 scroll-mt-32">
+                            <!-- Programming -->
+                            <div class="p-5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all hover:-translate-y-1">
+                                <div class="flex items-center gap-3 mb-4 text-cyan-400">
+                                    <i data-lucide="terminal" width="20"></i>
+                                    <h4 class="font-semibold text-white">Programming</h4>
+                                </div>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-2 py-1 text-xs rounded bg-white/5 border border-white/10 text-gray-300">C</span>
+                                    <span class="px-2 py-1 text-xs rounded bg-white/5 border border-white/10 text-gray-300">Java</span>
+                                    <span class="px-2 py-1 text-xs rounded bg-white/5 border border-white/10 text-gray-300">Python</span>
+                                    <span class="px-2 py-1 text-xs rounded bg-white/5 border border-white/10 text-gray-300">DSA</span>
+                                </div>
+                            </div>
+                            <!-- Web Dev -->
+                            <div class="p-5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all hover:-translate-y-1">
+                                <div class="flex items-center gap-3 mb-4 text-cyan-400">
+                                    <i data-lucide="code" width="20"></i>
+                                    <h4 class="font-semibold text-white">Web Dev</h4>
+                                </div>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-2 py-1 text-xs rounded bg-white/5 border border-white/10 text-gray-300">HTML/CSS</span>
+                                    <span class="px-2 py-1 text-xs rounded bg-white/5 border border-white/10 text-gray-300">JavaScript</span>
+                                    <span class="px-2 py-1 text-xs rounded bg-white/5 border border-white/10 text-gray-300">React</span>
+                                    <span class="px-2 py-1 text-xs rounded bg-white/5 border border-white/10 text-gray-300">Tailwind</span>
+                                </div>
+                            </div>
+                            <!-- AI / ML -->
+                            <div class="p-5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all hover:-translate-y-1">
+                                <div class="flex items-center gap-3 mb-4 text-cyan-400">
+                                    <i data-lucide="cpu" width="20"></i>
+                                    <h4 class="font-semibold text-white">AI / ML</h4>
+                                </div>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-2 py-1 text-xs rounded bg-white/5 border border-white/10 text-gray-300">Prompt Eng</span>
+                                    <span class="px-2 py-1 text-xs rounded bg-white/5 border border-white/10 text-gray-300">LLMs</span>
+                                    <span class="px-2 py-1 text-xs rounded bg-white/5 border border-white/10 text-gray-300">RAG</span>
+                                    <span class="px-2 py-1 text-xs rounded bg-white/5 border border-white/10 text-gray-300">Flask APIs</span>
+                                </div>
+                            </div>
+                            <!-- Tools -->
+                            <div class="p-5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all hover:-translate-y-1">
+                                <div class="flex items-center gap-3 mb-4 text-cyan-400">
+                                    <i data-lucide="database" width="20"></i>
+                                    <h4 class="font-semibold text-white">Tools & Design</h4>
+                                </div>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-2 py-1 text-xs rounded bg-white/5 border border-white/10 text-gray-300">Git</span>
+                                    <span class="px-2 py-1 text-xs rounded bg-white/5 border border-white/10 text-gray-300">VS Code</span>
+                                    <span class="px-2 py-1 text-xs rounded bg-white/5 border border-white/10 text-gray-300">Figma</span>
+                                    <span class="px-2 py-1 text-xs rounded bg-white/5 border border-white/10 text-gray-300">UI/UX</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Projects Section -->
+        <section id="projects" class="reveal-section py-20 md:py-32 relative">
+            <div class="container mx-auto px-6">
+                <div class="mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-2 flex items-center gap-3">
+                        <span class="w-8 h-1 bg-cyan-500 rounded-full"></span>
+                        Featured Projects
+                    </h2>
+                    <div class="w-full h-[1px] bg-gradient-to-r from-white/10 to-transparent mt-4"></div>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project 1 -->
+                    <div class="project-card group relative rounded-2xl bg-gray-900 border border-white/10 overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] hover:border-cyan-500/50 hover:-translate-y-2"
+                         data-title="Quick Puncher"
+                         data-category="Web Application"
+                         data-description="A high-performance responsive web app designed for rapid user input and instant result calculation. Features a minimalist UI focused on speed and accessibility."
+                         data-tech="React,CSS3,Vite"
+                         data-demo="https://quick-puncher-demo.vercel.app"
+                         data-code="https://github.com/maazshaik16/Quick-Puncher"
+                         onclick="openModal(this)">
+                        <div class="h-48 bg-gradient-to-br from-gray-800 to-black flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+                             <div class="text-6xl text-gray-700 opacity-50 group-hover:text-cyan-500/50 transition-colors">
+                                <i data-lucide="code" width="48" height="48"></i>
+                             </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider">Web Application</span>
+                                <i data-lucide="external-link" class="text-gray-500 group-hover:text-white transition-colors" width="16"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">Quick Puncher</h3>
+                            <p class="text-gray-400 text-sm line-clamp-2">A high-performance responsive web app designed for rapid user input and instant result calculation.</p>
+                            <div class="mt-4 flex flex-wrap gap-2">
+                                <span class="text-xs text-gray-500">#React</span>
+                                <span class="text-xs text-gray-500">#CSS3</span>
+                                <span class="text-xs text-gray-500">#Vite</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="project-card group relative rounded-2xl bg-gray-900 border border-white/10 overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] hover:border-cyan-500/50 hover:-translate-y-2"
+                         data-title="AI Chatbot"
+                         data-category="Generative AI"
+                         data-description="A conversational agent built using advanced LLM APIs. Optimized with custom prompt engineering techniques to handle specific business queries accurately."
+                         data-tech="Python,Flask,OpenAI API,React"
+                         data-demo="https://ai-chatbot-demo.vercel.app"
+                         data-code="https://github.com/maazshaik16/AI-Chatbot"
+                         onclick="openModal(this)">
+                        <div class="h-48 bg-gradient-to-br from-gray-800 to-black flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+                             <div class="text-6xl text-gray-700 opacity-50 group-hover:text-cyan-500/50 transition-colors">
+                                <i data-lucide="cpu" width="48" height="48"></i>
+                             </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider">Generative AI</span>
+                                <i data-lucide="external-link" class="text-gray-500 group-hover:text-white transition-colors" width="16"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">AI Chatbot</h3>
+                            <p class="text-gray-400 text-sm line-clamp-2">A conversational agent built using advanced LLM APIs. Optimized with custom prompt engineering.</p>
+                            <div class="mt-4 flex flex-wrap gap-2">
+                                <span class="text-xs text-gray-500">#Python</span>
+                                <span class="text-xs text-gray-500">#Flask</span>
+                                <span class="text-xs text-gray-500">#OpenAI API</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certs" class="reveal-section py-20 md:py-32 relative bg-gradient-to-b from-transparent to-black/50">
+            <div class="container mx-auto px-6">
+                <div class="mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-2 flex items-center gap-3">
+                        <span class="w-8 h-1 bg-cyan-500 rounded-full"></span>
+                        Certifications & Achievements
+                    </h2>
+                    <div class="w-full h-[1px] bg-gradient-to-r from-white/10 to-transparent mt-4"></div>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="p-6 rounded-xl bg-white/5 border border-white/10 hover:border-purple-500/50 transition-all group">
+                        <i data-lucide="award" class="text-purple-500 mb-4 group-hover:scale-110 transition-transform" width="32" height="32"></i>
+                        <h4 class="font-bold text-white mb-1">Forage Data Analytics</h4>
+                        <p class="text-sm text-gray-400">Forage</p>
+                        <p class="text-xs text-gray-600 mt-2">2024</p>
+                    </div>
+                    <div class="p-6 rounded-xl bg-white/5 border border-white/10 hover:border-purple-500/50 transition-all group">
+                        <i data-lucide="award" class="text-purple-500 mb-4 group-hover:scale-110 transition-transform" width="32" height="32"></i>
+                        <h4 class="font-bold text-white mb-1">Generative AI Data Analytics</h4>
+                        <p class="text-sm text-gray-400">Tata Group</p>
+                        <p class="text-xs text-gray-600 mt-2">2024</p>
+                    </div>
+                    <div class="p-6 rounded-xl bg-white/5 border border-white/10 hover:border-purple-500/50 transition-all group">
+                        <i data-lucide="award" class="text-purple-500 mb-4 group-hover:scale-110 transition-transform" width="32" height="32"></i>
+                        <h4 class="font-bold text-white mb-1">Hackathon Participant</h4>
+                        <p class="text-sm text-gray-400">Multiple Events</p>
+                        <p class="text-xs text-gray-600 mt-2">2023-2024</p>
+                    </div>
+                    <div class="p-6 rounded-xl bg-white/5 border border-white/10 hover:border-purple-500/50 transition-all group">
+                        <i data-lucide="award" class="text-purple-500 mb-4 group-hover:scale-110 transition-transform" width="32" height="32"></i>
+                        <h4 class="font-bold text-white mb-1">Failathon Experience</h4>
+                        <p class="text-sm text-gray-400">StartUp Community</p>
+                        <p class="text-xs text-gray-600 mt-2">2024</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="reveal-section py-20 md:py-32 relative">
+            <div class="container mx-auto px-6">
+                <div class="mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-2 flex items-center gap-3">
+                        <span class="w-8 h-1 bg-cyan-500 rounded-full"></span>
+                        Get In Touch
+                    </h2>
+                    <div class="w-full h-[1px] bg-gradient-to-r from-white/10 to-transparent mt-4"></div>
+                </div>
+
+                <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="text-2xl font-bold text-white mb-4">Let's Build The Future</h3>
+                        <p class="text-gray-400 mb-8">
+                            Whether you have a question, a project idea, or just want to discuss the latest in AI, feel free to reach out.
+                        </p>
+                        
+                        <div class="space-y-6">
+                            <a href="mailto:maazshaik86@gmail.com" class="flex items-center gap-4 text-gray-300 hover:text-cyan-400 transition-colors group">
+                                <div class="p-3 rounded-full bg-white/5 border border-white/10 group-hover:border-cyan-500/50">
+                                    <i data-lucide="mail" width="20"></i>
+                                </div>
+                                <span>maazshaik86@gmail.com</span>
+                            </a>
+                            
+                            <div class="flex gap-4 pt-4">
+                                <a href="https://github.com/maazshaik16" target="_blank" rel="noreferrer" class="p-3 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-cyan-600 hover:border-transparent transition-all transform hover:-translate-y-1">
+                                    <i data-lucide="github" width="24"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/in/shaik-maaz-449233338" target="_blank" rel="noreferrer" class="p-3 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-cyan-600 hover:border-transparent transition-all transform hover:-translate-y-1">
+                                    <i data-lucide="linkedin" width="24"></i>
+                                </a>
+                                <a href="mailto:maazshaik86@gmail.com" class="p-3 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-cyan-600 hover:border-transparent transition-all transform hover:-translate-y-1">
+                                    <i data-lucide="mail" width="24"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form id="contact-form" class="space-y-4">
+                        <div class="relative group">
+                            <input type="text" id="name" required placeholder="Name" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors peer">
+                            <div class="absolute inset-0 rounded-lg bg-cyan-500/5 opacity-0 peer-focus:opacity-100 pointer-events-none transition-opacity"></div>
+                        </div>
+                        <div class="relative group">
+                            <input type="email" id="email" required placeholder="Email" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors peer">
+                        </div>
+                        <div class="relative group">
+                            <textarea id="message" rows="4" required placeholder="Message" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors peer"></textarea>
+                        </div>
+                        
+                        <button type="submit" id="submit-btn" class="w-full py-3 rounded-lg font-bold tracking-wide transition-all shadow-lg transform hover:scale-[1.02] flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-600 to-blue-600 text-white hover:from-cyan-500 hover:to-blue-500">
+                            <span>Send Message</span>
+                        </button>
+                        <div id="form-status" class="text-sm mt-2 hidden"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-black text-center border-t border-white/10 text-gray-600 text-sm">
+        <p>© 2026 Shaik Maaz. All rights reserved.</p>
+        <p class="mt-2 flex justify-center items-center gap-2">
+            Built with <i data-lucide="code" width="14"></i> and <i data-lucide="cpu" width="14"></i>
+        </p>
+    </footer>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn">
+        <div class="bg-slate-900 border border-white/20 rounded-2xl max-w-2xl w-full p-6 relative shadow-2xl animate-scaleIn" onclick="event.stopPropagation()">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i data-lucide="x" width="24"></i>
+            </button>
+            
+            <span id="modal-category" class="text-cyan-400 text-sm font-bold tracking-widest uppercase mb-2 block"></span>
+            <h3 id="modal-title" class="text-3xl font-bold text-white mb-4"></h3>
+            
+            <div id="modal-tech" class="flex flex-wrap gap-2 mb-6"></div>
+            
+            <p id="modal-desc" class="text-gray-300 leading-relaxed mb-8"></p>
+            
+            <div class="flex gap-4">
+                <a id="modal-demo" href="#" target="_blank" rel="noopener noreferrer" class="flex-1 py-3 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white text-center font-semibold transition-colors flex items-center justify-center gap-2">
+                    <i data-lucide="external-link" width="18"></i> Live Demo
+                </a>
+                <a id="modal-code" href="#" target="_blank" rel="noopener noreferrer" class="flex-1 py-3 rounded-lg border border-white/20 hover:bg-white/10 text-white text-center font-semibold transition-colors flex items-center justify-center gap-2">
+                    <i data-lucide="github" width="18"></i> View Code
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Firebase Setup
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+        let app, auth, db, currentUser;
+
+        try {
+            if (firebaseConfig && Object.keys(firebaseConfig).length > 0) {
+                app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+
+                // Authentication
+                const initAuth = async () => {
+                    try {
+                        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                            await signInWithCustomToken(auth, __initial_auth_token);
+                        } else {
+                            await signInAnonymously(auth);
+                        }
+                    } catch (error) {
+                        console.error("Auth failed", error);
+                    }
+                };
+
+                initAuth();
+                onAuthStateChanged(auth, (user) => {
+                    currentUser = user;
+                });
+            }
+        } catch (e) {
+            console.error("Firebase init failed", e);
+        }
+
+        // Contact Form Logic
+        const form = document.getElementById('contact-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const statusDiv = document.getElementById('form-status');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            if (!currentUser) {
+                showStatus('Initializing secure connection... try again.', 'text-red-400');
+                return;
+            }
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            setLoading(true);
+
+            try {
+                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'messages'), {
+                    name,
+                    email,
+                    message,
+                    userId: currentUser.uid,
+                    createdAt: serverTimestamp(),
+                });
+                
+                showStatus('Message Sent Successfully!', 'text-green-400');
+                form.reset();
+            } catch (error) {
+                console.error("Error sending message:", error);
+                showStatus('Failed to send message. Please try again.', 'text-red-400');
+            } finally {
+                setLoading(false);
+            }
+        });
+
+        function setLoading(isLoading) {
+            submitBtn.disabled = isLoading;
+            if (isLoading) {
+                submitBtn.innerHTML = '<span class="animate-spin">⟳</span> Sending...';
+                submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+            } else {
+                submitBtn.innerHTML = '<span>Send Message</span>';
+                submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+            }
+        }
+
+        function showStatus(msg, colorClass) {
+            statusDiv.textContent = msg;
+            statusDiv.className = `text-sm mt-2 ${colorClass} block animate-fadeIn`;
+            setTimeout(() => {
+                statusDiv.classList.add('hidden');
+            }, 5000);
+        }
+    </script>
+
+    <script>
+        // --- UI LOGIC ---
+
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Cursor Glow
+        const cursor = document.getElementById('cursor-glow');
+        window.addEventListener('mousemove', (e) => {
+            cursor.style.background = `radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px, rgba(56, 189, 248, 0.06), transparent 40%)`;
+        });
+
+        // Navbar Scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-black/80', 'backdrop-blur-md', 'border-b', 'border-white/10', 'py-3');
+                navbar.classList.remove('bg-transparent', 'py-6');
+            } else {
+                navbar.classList.add('bg-transparent', 'py-6');
+                navbar.classList.remove('bg-black/80', 'backdrop-blur-md', 'border-b', 'border-white/10', 'py-3');
+            }
+        });
+
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+            const icon = mobileMenu.classList.contains('hidden') ? 'menu' : 'x';
+            mobileMenuBtn.innerHTML = `<i data-lucide="${icon}"></i>`;
+            lucide.createIcons();
+        });
+        
+        // Close mobile menu on link click
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+                mobileMenuBtn.innerHTML = `<i data-lucide="menu"></i>`;
+                lucide.createIcons();
+            });
+        });
+
+        // Text Typing Animation
+        const roles = ["CSBS Student", "Full-Stack Developer", "Generative AI Enthusiast"];
+        let roleIndex = 0;
+        const roleTextElement = document.getElementById('role-text');
+        
+        setInterval(() => {
+            roleIndex = (roleIndex + 1) % roles.length;
+            // Simple text switch for vanilla JS to keep it lightweight, 
+            // or we could implement full typewriter char by char logic.
+            // Let's stick to the React logic which was a simple text swap in interval
+            roleTextElement.textContent = roles[roleIndex];
+        }, 3000);
+
+        // Scroll Reveal
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Modal Logic
+        const modal = document.getElementById('project-modal');
+        
+        function openModal(card) {
+            const title = card.getAttribute('data-title');
+            const category = card.getAttribute('data-category');
+            const desc = card.getAttribute('data-description');
+            const tech = card.getAttribute('data-tech').split(',');
+            const demo = card.getAttribute('data-demo');
+            const code = card.getAttribute('data-code');
+
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-category').textContent = category;
+            document.getElementById('modal-desc').textContent = desc;
+            document.getElementById('modal-demo').href = demo;
+            document.getElementById('modal-code').href = code;
+
+            const techContainer = document.getElementById('modal-tech');
+            techContainer.innerHTML = '';
+            tech.forEach(t => {
+                const span = document.createElement('span');
+                span.className = "px-3 py-1 rounded-full bg-white/5 border border-white/10 text-sm text-gray-300";
+                span.textContent = t;
+                techContainer.appendChild(span);
+            });
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Close modal on outside click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+    </script>
+</body>
+</html>
